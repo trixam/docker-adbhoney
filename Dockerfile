@@ -4,12 +4,11 @@ FROM arm32v7/alpine:latest
 ADD dist/ /root/dist/
 #
 # Install packages
-RUN sed -i 's/dl-cdn/dl-2/g' /etc/apk/repositories && \
-    apk -U add \
-            git \
-            libcap \
-            python3 \
-            python3-dev && \
+RUN apk -U add \
+        git \
+        libcap \
+        python3 \
+        python3-dev && \
 #
 # Install adbhoney from git
     git clone --depth=1 https://github.com/huuck/ADBHoney /opt/adbhoney && \
