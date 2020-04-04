@@ -1,7 +1,7 @@
 FROM arm32v7/alpine:latest
 
 # Copy across the qemu binary that was downloaded in the previous build step
-COPY qemu-arm-static /usr/bin
+#COPY qemu-arm-static /usr/bin
 
 # Include dist/
 ADD dist/ /root/dist/
