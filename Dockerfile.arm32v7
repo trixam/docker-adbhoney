@@ -29,7 +29,8 @@ RUN addgroup -g 2000 adbhoney && \
 RUN apk del --purge git \
         python3-dev && \
     rm -rf /root/* && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    rm -rf /usr/bin/qemu-arm-static
 
 # Set workdir and start adbhoney
 STOPSIGNAL SIGINT
