@@ -7,7 +7,7 @@ COPY qemu-arm-static /usr/bin
 ADD dist/ /root/dist/ 
 
 # Install packages
-RUN apk -U add \
+RUN apk add --update-cache \
         git \
         libcap \
         python3 \
@@ -23,14 +23,15 @@ RUN apk -U add \
     chown -R adbhoney:adbhoney /opt/adbhoney && \
     setcap cap_net_bind_service=+ep /usr/bin/python3.8 && \
     # Clean up
-    apk del --purge git \
+    apk del --purge \
+        git \
         python3-dev && \
     rm -rf /root/* && \
     rm -rf /var/cache/apk/* && \
     rm -rf /usr/bin/qemu-arm-static
 
 # Set workdir and start adbhoney
-STOPSIGNAL SIGINT
+STOPSIGNAL SIGKILL
 USER adbhoney:adbhoney
-WORKDIR /opt/adbhoney/
-CMD nohup /usr/bin/python3 run.py
+WORKDIR /opt/adbhoney
+CMD /usr/bin/python3 run.py
