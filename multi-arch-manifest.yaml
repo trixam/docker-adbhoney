@@ -1,5 +1,4 @@
-image: trixam/arm32v7-docker-adbhoney:latest
-manifests:
+image: trixam/arm32v7-docker-adbhoney
   - image: trixam/arm32v7-docker-adbhoney:latest
     platform:
       architecture: arm
