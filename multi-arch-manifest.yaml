@@ -1,15 +1,15 @@
-image: trixam/arm32v7-docker.adbhoney:latest
+image: trixam/docker-adbhoney:latest
 manifests:
-  - image: arm32v7-docker.adbhoney:latest-amd64
+  - image: docker-adbhoney:latest-amd64
     platform:
       architecture: amd64
       os: linux
-  - image: arm32v7-docker.adbhoney:latest-arm64v8
+  - image: docker-adbhoney:latest-arm64v8
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  - image: arm32v7-docker.adbhoney:latest-arm32v7
+  - image: docker-adbhoney:latest-arm32v7
     platform:
       architecture: arm
       os: linux
