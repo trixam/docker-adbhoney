@@ -6,22 +6,21 @@ curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download
 chmod +x manifest-tool
 
 # Generate the manifest file.
-# Parameter 1 is the multi-arch image name, e.g. trixam/arm32v7-docker-adbhoney:0.5
-# Parameter 2 is the base-image for the variants, e.g. trixam/arm32v7-docker-adbhoney:0.5-apache
+
 function generate_manifest {
   cat > manifest-generated.yaml << EOF
-image: $1
+image: trixam/arm32v7-docker-adbhone:latest
 manifests:
-  - image: amd-$2
+  - image: trixam/arm32v7-docker-adbhone:amd64
     platform:
       architecture: amd64
       os: linux
-  - image: arm32v7-$2
+  - image: trixam/arm32v7-docker-adbhone:arm32v7
     platform:
       architecture: arm
       os: linux
       variant: v7
-  - image: arm64v8-$2
+  - image: trixam/arm32v7-docker-adbhone:arm64v8
     platform:
       architecture: arm64
       os: linux
@@ -30,5 +29,7 @@ EOF
 }
 
 echo "Pushing multi-arch manifest $IMAGE_NAME"
-generate_manifest $IMAGE_NAME $IMAGE_NAME
+generate_manifest
+env
+#$IMAGE_NAME $IMAGE_NAME
 ./manifest-tool push from-spec manifest-generated.yaml
