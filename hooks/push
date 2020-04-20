@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 # Custom build script to push images for all supported architectures.
 
