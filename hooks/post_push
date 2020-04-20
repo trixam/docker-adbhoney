@@ -10,7 +10,7 @@ chmod +x manifest-tool
 # Parameter 2 is the base-image for the variants, e.g. ckulka/baikal:0.5.1-apache
 function generate_manifest {
   cat > manifest-generated.yaml << EOF
-image: trixam/docker-adbhoney:latest
+image: trixam/docker-adbhoney:latest-arm32v7
 manifests:
   - image: docker-adbhoney:latest-amd64
     platform:
