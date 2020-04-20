@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Use manifest-tool to create the manifest, given the experimental
