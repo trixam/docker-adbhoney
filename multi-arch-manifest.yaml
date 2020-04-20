@@ -1,6 +1,0 @@
-image: trixam/arm32v7-docker-adbhoney:latest
-  - image: trixam/arm32v7-docker-adbhoney:arm32v7-latest
-    platform:
-      architecture: arm
-      os: linux
-      variant: v7
