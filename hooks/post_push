@@ -12,16 +12,16 @@ function generate_manifest {
   cat > manifest-generated.yaml << EOF
 image: $1
 manifests:
-  - image: $2-amd64
+  - image: amd-$2
     platform:
       architecture: amd64
       os: linux
-  - image: $2-arm32v7
+  - image: arm32v7-$2
     platform:
       architecture: arm
       os: linux
       variant: v7
-  - image: $2-arm64v8
+  - image: arm64v8-$2
     platform:
       architecture: arm64
       os: linux
