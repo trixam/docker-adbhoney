@@ -1,0 +1,42 @@
+FROM alpine:latest AS builder
+
+RUN apk --update --no-cache add curl tar && \
+    curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
+
+FROM arm32v7/alpine:latest
+
+# Copy across the qemu binary that was downloaded in the previous build step
+COPY --from=builder /qemu-arm-static /usr/bin
+
+# Include dist/
+ADD dist/ /root/dist/ 
+
+# Install packages
+RUN apk add --update-cache \
+        git \
+        libcap \
+        python3 \
+        python3-dev && \
+    # Install adbhoney from git
+    git clone --depth=1 https://github.com/huuck/ADBHoney /opt/adbhoney && \
+    cp /root/dist/adbhoney.cfg /opt/adbhoney && \
+    sed -i 's/dst_ip/dest_ip/' /opt/adbhoney/adbhoney/core.py && \
+    sed -i 's/dst_port/dest_port/' /opt/adbhoney/adbhoney/core.py && \
+    # Setup user, groups and configs
+    addgroup -g 2000 adbhoney && \
+    adduser -S -H -s /bin/ash -u 2000 -D -g 2000 adbhoney && \
+    chown -R adbhoney:adbhoney /opt/adbhoney && \
+    setcap cap_net_bind_service=+ep /usr/bin/python3.8 && \
+    # Clean up
+    apk del --purge \
+        git \
+        python3-dev && \
+    rm -rf /root/* && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /usr/bin/qemu-arm-static
+
+# Set workdir and start adbhoney
+STOPSIGNAL SIGKILL
+USER adbhoney:adbhoney
+WORKDIR /opt/adbhoney
+CMD /usr/bin/python3 run.py
