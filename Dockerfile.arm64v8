@@ -12,7 +12,7 @@ COPY --from=builder /qemu-aarch64-static /usr/bin
 ADD dist/ /root/dist/ 
 
 # Install packages
-RUN apk add --update-cache \
+RUN apk add --no-cache --update-cache \
         git \
         libcap \
         python3 \
