@@ -6,7 +6,7 @@ RUN apk --update --no-cache add curl tar && \
 FROM arm64v8/alpine:latest
 
 # Copy across the qemu binary that was downloaded in the previous build step
-COPY --from=builder /qemu-arm-static /usr/bin
+COPY --from=builder /qemu-aarch64-static /usr/bin
 
 # Include dist/
 ADD dist/ /root/dist/ 
@@ -33,7 +33,7 @@ RUN apk add --update-cache \
         python3-dev && \
     rm -rf /root/* && \
     rm -rf /var/cache/apk/* && \
-    rm -rf /usr/bin/qemu-arm-static
+    rm -rf /usr/bin/qemu-aarch64-static
 
 # Set workdir and start adbhoney
 STOPSIGNAL SIGKILL
