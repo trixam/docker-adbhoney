@@ -1,4 +1,4 @@
-image: ${USERNAME}/docker-adbhoney:latest
+image: trixam/docker-adbhoney:latest
 manifests:
   - image: trixam/docker-adbhoney:latest-amd64
     platform:
