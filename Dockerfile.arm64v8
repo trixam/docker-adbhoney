@@ -20,8 +20,7 @@ RUN apk add --update-cache \
     # Install adbhoney from git
     git clone --depth=1 https://github.com/huuck/ADBHoney /opt/adbhoney && \
     cp /root/dist/adbhoney.cfg /opt/adbhoney && \
-    sed -i 's/dst_ip/dest_ip/' /opt/adbhoney/adbhoney/core.py && \
-    sed -i 's/dst_port/dest_port/' /opt/adbhoney/adbhoney/core.py && \
+    sed -i 's/dst_/dest_/' /opt/adbhoney/adbhoney/core.py && \
     # Setup user, groups and configs
     addgroup -g 2000 adbhoney && \
     adduser -S -H -s /bin/ash -u 2000 -D -g 2000 adbhoney && \
