@@ -1,0 +1,20 @@
+version: '3.8'
+
+networks:
+  adbhoney_local:
+
+services:
+
+  adbhoney:
+    container_name: adbhoney
+    restart: always
+    networks:
+     - adbhoney_local
+    ports:
+     - "5555:5555"
+    image: "trixam/docker-adbhone:latest"
+    read_only: true
+    volumes:
+     - /home/armedpot/adbhoney/log:/opt/adbhoney/log
+     - /home/armedpot/adbhoney/downloads:/opt/adbhoney/dl
+     
