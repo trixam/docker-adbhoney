@@ -12,9 +12,8 @@ services:
      - adbhoney_local
     ports:
      - "5555:5555"
-    image: "trixam/docker-adbhone:latest"
-    read_only: true
+    image: "${USERNAME}/${IMAGENAME}:${TAG}"
     volumes:
-     - /home/armedpot/adbhoney/log:/opt/adbhoney/log
-     - /home/armedpot/adbhoney/downloads:/opt/adbhoney/dl
+     - ${ARMEDPOTPATH}/adbhoney/log:/opt/adbhoney/log
+     - ${ARMEDPOTPATH}/adbhoney/downloads:/opt/adbhoney/dl
      
